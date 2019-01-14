@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+
+    <Label fx:id="hostMessageLabel" text="Your message will appear here"/>
+
+    <Button fx:id="openConnection" text="Open Connection" onAction="#startServer"
+    GridPane.rowIndex="6"/>
+
+    <Button fx:id="updateHostMessage" text="Update" onAction="#updateServerMessage" GridPane.columnIndex="1"/>
+
+</GridPane>
