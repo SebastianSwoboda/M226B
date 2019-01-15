@@ -10,31 +10,30 @@ import java.io.*;
 import java.net.Socket;
 
 
-
 public class Main extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("connect.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/connect.fxml"));
+
         primaryStage.setTitle("Connection");
         primaryStage.setScene(new Scene(root, 300, 275));
-
-
-
-
 
 
         primaryStage.show();
     }
 
-    protected Stage createClientStage(){
+    protected Stage createClientStage() {
         Stage stage = new Stage();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("studies/networking/client.fxml"));
-
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/client.fxml"));
 
 
             stage.setTitle("Messaging");
@@ -43,79 +42,35 @@ public class Main extends Application {
 
             stage.show();
 
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }return stage;
-        }
-
-        protected Stage createHostStage(){
-            Stage stage = new Stage();
-
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("host.fxml"));
-
-
-
-                stage.setTitle("Host");
-                stage.setScene(new Scene(root, 300, 275));
-
-
-
-
-                stage.show();
-
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }return stage;
-
-
-        }
-
-
-
-/*
-    protected Socket connectToServer(){
-        String serverName = "localhost";
-        int serverPort =6606;
-        Socket client=null;
-
-        try{
-
-            client = new Socket(serverName, serverPort);
-
-            OutputStream outToServer = client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-
-            InputStream inFromServer = client.getInputStream();
-            DataInputStream in = new DataInputStream(inFromServer);
-
-            System.out.println("Server says " + in.readUTF());
-            client.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return client;
+        return stage;
+    }
 
-    }*/
 
-    protected void outputStreamToServer(Socket client){
+
+    protected Stage createHostStage() throws Exception{
+        Stage stage = new Stage();
+
+
         try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/host.fxml"));
 
 
-        OutputStream outToServer = client.getOutputStream();
-        DataOutputStream out = new DataOutputStream(outToServer);
+            stage.setTitle("Host");
+            stage.setScene(new Scene(root, 300, 275));
 
-        InputStream inFromServer = client.getInputStream();
-        DataInputStream in = new DataInputStream(inFromServer);}catch (IOException e){
-            //TODO
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return stage;
+
 
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

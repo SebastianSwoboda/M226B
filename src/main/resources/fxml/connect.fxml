@@ -8,7 +8,7 @@
 
 
 
-    <Button fx:id="connectButton" text="Connect" onAction="#connect"/>
+    <Button fx:id="connectButton" text="Connect" onAction="#connectToServer"/>
     <Button fx:id="startHost" text="Start Host" onAction="#startHost" GridPane.rowIndex="3"/>
 
 

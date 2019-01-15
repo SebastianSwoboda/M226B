@@ -5,27 +5,53 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Controller {
-    Control control=new Control();
+    static Control control = new Control();
 
-    Client client = new Client();
     Main main = new Main();
 
-    //Callable server = new Server();
-   // Future<String> future;
 
-  //  Socket user = new Socket();
+    //Callable server = new ServerThread();
+    // Future<String> future;
+
+    //  Socket user = new Socket();
 
     @FXML
     private TextField messagingField;
     @FXML
-    private Label hostMessageLabel;
+    private TextField serverMessagingField;
+
     @FXML
-    private void connect() {
+    private Label serverMessageLabel;
+
+    @FXML
+    private Label clientMessageLabel;
+
+    @FXML
+    private void startHost() {
+
+
+        try {
+
+            main.createHostStage();
+            control.startServer();
+
+
+        } catch (Exception e) {
+            //TODO}
+
+
+        }
+
+
+    }
+
+    @FXML
+    private void connectToServer() {
         try {
 
 
-            //client.connectToServer();
             main.createClientStage();
+            control.startClient();
 
         } catch (Exception e) {
             //TODO
@@ -42,13 +68,9 @@ public class Controller {
             OutputStream outToServer = user.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF(messagingField.getText());*/
-            hostMessageLabel.setText("hello dude");
-            client.sendDataToServer(messagingField.getText());
-            hostMessageLabel.setText(control.future.get());
-
-
-
-
+            //hostMessageLabel.setText("hello dude");
+            Client.messageForServer = messagingField.getText();
+            control.sendMessage();
 
 
         } catch (Exception e) {
@@ -59,59 +81,24 @@ public class Controller {
 
     }
 
+    @FXML
+    private void sendMessageAsServer() {
+        ServerThread.messageForClient = serverMessagingField.getText();
+    }
 
 
     @FXML
-    private void startHost() {
-
-
-
-        try {
-
-
-
-            //ExecutorService executor = Executors.newSingleThreadExecutor();
-
-            main.createHostStage();
-            control.startHost();
-
-           // future = executor.submit(server);
-
-        } catch (Exception e) {
-            //TODO}
-
-
-        }
-
-
+    private void updateClientMessage() {
+        serverMessageLabel.setText(ServerThread.messageFromClient);
 
     }
 
     @FXML
-    private void startServer() {
-
-
-
-
-
+    private void updateServerMessageMessage() {
+        control.receiveMessage();
+        clientMessageLabel.setText(Client.messageFromServer);
 
     }
-
-
-    private void waitForServerMessage(){
-
-
-    }
-
-    @FXML
-    private void updateServerMessage(){
-
-
-
-
-
-    }
-
 
 
 }
