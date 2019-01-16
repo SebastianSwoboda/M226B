@@ -1,4 +1,4 @@
-package sample;
+package serverClientMessenger;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.Socket;
 
 
 public class Main extends Application {
