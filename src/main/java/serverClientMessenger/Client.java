@@ -9,29 +9,26 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client implements Runnable{
-   Socket serverSocket;
-    public Client(Socket serverSocket){
+public class Client implements Runnable {
+    private static final Logger LOGGER = LogManager.getLogger(Client.class);
+    static String messageFromServer;
+    static String messageForServer;
+    private Socket serverSocket;
+
+    public Client(Socket serverSocket) {
 
 
-this.serverSocket=serverSocket;
+        this.serverSocket = serverSocket;
 
     }
-
-
-    private static final Logger LOGGER = LogManager.getLogger(Client.class);
-    public static String messageFromServer;
-    public static String messageForServer;
-
 
     public void run() {
         try {
 
 
-            Socket serverSocket = new Socket("localhost", 6606);
             LOGGER.info("Connection to server: " + serverSocket.isConnected());
 
-            while(serverSocket.isConnected()){
+            while (serverSocket.isConnected()) {
                 PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(serverSocket.getInputStream()));
@@ -47,57 +44,29 @@ this.serverSocket=serverSocket;
         }
     }
 
-    public void sendMessage(){
+    void sendMessage() {
         try {
             PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
             out.println(messageForServer);
 
-        }catch (IOException e){
-
+        } catch (IOException e) {
+            LOGGER.error("when sending message to server" + e);
         }
     }
 
-    public void receiveMessage(){
+    void receiveMessage() {
         try {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(serverSocket.getInputStream()));
             //LOGGER.info(in.readLine());
-            messageFromServer=in.readLine();
-
-        }catch (IOException e){
-
-    }
-
-/*
-    protected void sendDataToServer(String message) {
-
-        try {
-
-            Socket serverSocket = new Socket("localhost", 6606);
-            LOGGER.info("Connection to server: "+ serverSocket.isConnected());
-
-            PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(serverSocket.getInputStream()));
 
 
-
-            messageFromServer=in.readLine();
-            out.println(message);
-
-
-
-
-
+            messageFromServer = in.readLine();
 
         } catch (IOException e) {
-            LOGGER.error("Error when sending message to host" + e);
-
+            LOGGER.error("when receiving message from server" + e);
         }
 
 
-
-    }*/
-
-
-}}
+    }
+}

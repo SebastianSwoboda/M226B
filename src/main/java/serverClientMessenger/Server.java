@@ -9,13 +9,18 @@ import java.net.Socket;
 
 public class Server implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger(Server.class);
+    private int port;
+
+    public Server(int port) {
+        this.port = port;
+    }
 
     public void run() {
         boolean listening = true;
         try {
 
-            ServerSocket serverSocket = new ServerSocket(6606);
-            while(listening){
+            ServerSocket serverSocket = new ServerSocket(port);
+            while (listening) {
                 LOGGER.info("Waiting for client on port " +
                         serverSocket.getLocalPort() + "...");
 

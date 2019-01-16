@@ -12,16 +12,16 @@ import java.net.SocketTimeoutException;
 
 public class ServerThread extends Thread {
     private static final Logger LOGGER = LogManager.getLogger(ServerThread.class);
-    public static String messageFromClient;
-    public static String messageForClient;
-    static Socket clientSocket;
+    static String messageFromClient;
+    static String messageForClient;
+    private static Socket clientSocket;
 
-    public ServerThread(Socket clientSocket) {
+    ServerThread(Socket clientSocket) {
         super("ServerThread");
-        this.clientSocket = clientSocket;
+        ServerThread.clientSocket = clientSocket;
     }
 
-    public static void sendMessageToClient() {
+    static void sendMessageToClient() {
         try {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             LOGGER.info("trying to send message to client " + messageForClient);
@@ -29,7 +29,7 @@ public class ServerThread extends Thread {
             out.println(ServerThread.messageForClient);
 
         } catch (IOException e) {
-            LOGGER.error("while sending message to client"+e);
+            LOGGER.error("while sending message to client" + e);
         }
 
     }
@@ -51,10 +51,10 @@ public class ServerThread extends Thread {
             }
 
         } catch (SocketTimeoutException s) {
-            LOGGER.error("Socket timed out!"+s);
+            LOGGER.error("Socket timed out!" + s);
 
         } catch (IOException e) {
-            LOGGER.error("while reading message from client" +e);
+            LOGGER.error("while reading message from client" + e);
 
         }
 

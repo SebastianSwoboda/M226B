@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.IOException;
 
 
 public class Main extends Application {
@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/connect.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/start.fxml"));
 
         primaryStage.setTitle("Connection");
         primaryStage.setScene(new Scene(root, 300, 275));
@@ -28,7 +28,46 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    protected Stage createClientStage() {
+
+    Stage createClientConfigStage() {
+        Stage stage = new Stage();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/clientConfig.fxml"));
+
+
+            stage.setTitle("ClientConfig");
+            stage.setScene(new Scene(root, 300, 275));
+
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stage;
+    }
+
+    Stage createServerConfigStage() {
+        Stage stage = new Stage();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/serverConfig.fxml"));
+
+
+            stage.setTitle("ServerConfig");
+            stage.setScene(new Scene(root, 300, 275));
+
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stage;
+    }
+
+    Stage createClientStage() {
         Stage stage = new Stage();
 
         try {
@@ -48,13 +87,12 @@ public class Main extends Application {
     }
 
 
-
-    protected Stage createHostStage() throws Exception{
+    Stage createServerStage() {
         Stage stage = new Stage();
 
 
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/host.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/server.fxml"));
 
 
             stage.setTitle("Server");

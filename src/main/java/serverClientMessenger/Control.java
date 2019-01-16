@@ -8,58 +8,45 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Control  {
+class Control {
 
     private static final Logger LOGGER = LogManager.getLogger(Control.class);
 
 
-    Client client;
+    private Client client;
 
-    public void startServer(){
+    void startServer(int port) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        executor.submit(new Server());
-
-
-
-
-
+        executor.submit(new Server(port));
 
 
     }
 
-    public void startClient(){
+    void startClient(String address, int port) {
 
         try {
 
 
-            Socket serverSocket = new Socket("localhost", 6606);
+            Socket serverSocket = new Socket(address, port);
             client = new Client(serverSocket);
             LOGGER.info("Client connected to server");
 
 
-
-    }catch (IOException e){
+        } catch (IOException e) {
+            LOGGER.error("when starting the client" + e);
         }
     }
 
-    public void sendMessage(){
+    void sendMessage() {
         LOGGER.info("Client sending message to server");
 
         client.sendMessage();
     }
 
-    public void receiveMessage(){
+    void receiveMessage() {
         client.receiveMessage();
     }
-
-
-
-
-
-
-
-
 
 
 }

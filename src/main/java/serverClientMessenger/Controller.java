@@ -3,17 +3,34 @@ package serverClientMessenger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Controller {
-    static Control control = new Control();
 
-    Main main = new Main();
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
+
+    private static Stage currentStage;
+
+    private static Control control = new Control();
+
+    private Main main = new Main();
 
 
     //Callable server = new ServerThread();
     // Future<String> future;
 
     //  Socket user = new Socket();
+
+    @FXML
+    private TextField serverPort;
+
+    @FXML
+    private TextField clientPort;
+
+    @FXML
+    private TextField serverAddress;
 
     @FXML
     private TextField messagingField;
@@ -26,39 +43,51 @@ public class Controller {
     @FXML
     private Label clientMessageLabel;
 
+
+    @FXML
+    private void startServerConfig() {
+        currentStage = main.createServerConfigStage();
+    }
+
+    @FXML
+    private void startClientConfig() {
+        currentStage = main.createClientConfigStage();
+
+    }
+
+
     @FXML
     private void startServer() {
+        currentStage.close();
+        main.createServerStage();
 
+        int portServer = Integer.parseInt(serverPort.getText());
 
-        try {
-
-            main.createHostStage();
-            control.startServer();
-
-
-        } catch (Exception e) {
-            //TODO}
-
-
-        }
+        control.startServer(portServer);
 
 
     }
+
 
     @FXML
-    private void connectToServer() {
+    private void startClient() {
         try {
 
+            currentStage.close();
+            int portClient = Integer.parseInt(clientPort.getText());
+            String addressForServer = serverAddress.getText();
+            control.startClient(addressForServer, portClient);
 
             main.createClientStage();
-            control.startClient();
+
 
         } catch (Exception e) {
-            //TODO
+            LOGGER.error("when starting client" + e);
         }
 
 
     }
+
 
     @FXML
     private void sendMessageAsClient() {
@@ -91,13 +120,13 @@ public class Controller {
 
     @FXML
     private void updateClientMessage() {
-            serverMessageLabel.setText(ServerThread.messageFromClient);
+        serverMessageLabel.setText(ServerThread.messageFromClient);
 
     }
 
     @FXML
     private void updateServerMessage() {
-        if(ServerThread.messageForClient!=null) {
+        if (ServerThread.messageForClient != null) {
 
             control.receiveMessage();
             clientMessageLabel.setText(Client.messageFromServer);
