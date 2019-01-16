@@ -27,7 +27,7 @@ public class Controller {
     private Label clientMessageLabel;
 
     @FXML
-    private void startHost() {
+    private void startServer() {
 
 
         try {
@@ -83,21 +83,25 @@ public class Controller {
 
     @FXML
     private void sendMessageAsServer() {
+
         ServerThread.messageForClient = serverMessagingField.getText();
+        ServerThread.sendMessageToClient();
     }
 
 
     @FXML
     private void updateClientMessage() {
-        serverMessageLabel.setText(ServerThread.messageFromClient);
+            serverMessageLabel.setText(ServerThread.messageFromClient);
 
     }
 
     @FXML
-    private void updateServerMessageMessage() {
-        control.receiveMessage();
-        clientMessageLabel.setText(Client.messageFromServer);
+    private void updateServerMessage() {
+        if(ServerThread.messageForClient!=null) {
 
+            control.receiveMessage();
+            clientMessageLabel.setText(Client.messageFromServer);
+        }
     }
 
 

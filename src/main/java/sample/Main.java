@@ -36,7 +36,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/client.fxml"));
 
 
-            stage.setTitle("Messaging");
+            stage.setTitle("Client");
             stage.setScene(new Scene(root, 300, 275));
 
 
@@ -58,7 +58,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/host.fxml"));
 
 
-            stage.setTitle("Host");
+            stage.setTitle("Server");
             stage.setScene(new Scene(root, 300, 275));
 
 

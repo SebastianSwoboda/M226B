@@ -51,6 +51,7 @@ this.serverSocket=serverSocket;
         try {
             PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
             out.println(messageForServer);
+
         }catch (IOException e){
 
         }
@@ -60,10 +61,11 @@ this.serverSocket=serverSocket;
         try {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(serverSocket.getInputStream()));
+            //LOGGER.info(in.readLine());
             messageFromServer=in.readLine();
+
         }catch (IOException e){
 
-        }
     }
 
 /*
@@ -98,4 +100,4 @@ this.serverSocket=serverSocket;
     }*/
 
 
-}
+}}
