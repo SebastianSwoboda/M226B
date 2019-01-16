@@ -1,5 +1,7 @@
 package serverClientMessenger;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,10 +20,7 @@ public class Controller {
     private Main main = new Main();
 
 
-    //Callable server = new ServerThread();
-    // Future<String> future;
 
-    //  Socket user = new Socket();
 
     @FXML
     private TextField serverPort;

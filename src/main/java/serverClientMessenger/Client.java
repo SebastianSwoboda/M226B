@@ -37,6 +37,9 @@ public class Client implements Runnable {
                 messageFromServer = in.readLine();
                 out.println(messageForServer);
             }
+            LOGGER.info("client has disconnected from server");
+            Thread.currentThread().interrupt();
+            return;
 
 
         } catch (IOException e) {

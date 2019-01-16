@@ -49,6 +49,8 @@ public class ServerThread extends Thread {
 
                 LOGGER.info("received client message " + messageFromClient);
             }
+            LOGGER.info("client has disconnected from server, socket will be closed");
+            Thread.currentThread().interrupt();
 
         } catch (SocketTimeoutException s) {
             LOGGER.error("Socket timed out!" + s);

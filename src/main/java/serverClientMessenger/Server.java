@@ -26,7 +26,11 @@ public class Server implements Runnable {
 
                 Socket clientSocket = serverSocket.accept();
                 new ServerThread(clientSocket).start();
+                listening = false;
             }
+            LOGGER.info("server socket has been closed");
+            Thread.currentThread().interrupt();
+            return;
 
         } catch (IOException e) {
             LOGGER.error("error when creating server socket" + e);
