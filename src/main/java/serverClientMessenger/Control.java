@@ -30,6 +30,11 @@ class Control {
 
             Socket serverSocket = new Socket(address, port);
             client = new Client(serverSocket);
+            Thread thread = new Thread(client);
+            thread.start();
+
+
+            //client = new Client(serverSocket);
             LOGGER.info("Client connected to server");
 
 
@@ -45,6 +50,7 @@ class Control {
     }
 
     void receiveMessage() {
+        LOGGER.info("calling receive method for client");
         client.receiveMessage();
     }
 

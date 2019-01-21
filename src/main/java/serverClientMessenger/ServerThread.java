@@ -1,5 +1,6 @@
 package serverClientMessenger;
 
+import javafx.application.Platform;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,6 +46,7 @@ public class ServerThread extends Thread {
 
 
                 messageFromClient = in.readLine();
+                Platform.runLater(new UpdateMessageLabel(false));
 
 
                 LOGGER.info("received client message " + messageFromClient);

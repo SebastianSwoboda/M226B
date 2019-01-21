@@ -8,7 +8,7 @@
         xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
 
-    <TextField fx:id="serverPort" text="enter port number"></TextField>
+    <TextField fx:id="serverPort" text="8888"></TextField>
     <Button fx:id="serverPortButton" text="Submit" onAction="#startServer" GridPane.columnIndex="2"> </Button>
 
 

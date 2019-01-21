@@ -3,6 +3,7 @@ package serverClientMessenger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -118,18 +119,20 @@ public class Controller {
 
 
     @FXML
-    private void updateClientMessage() {
+    protected void updateClientMessage() {
         serverMessageLabel.setText(ServerThread.messageFromClient);
 
     }
 
     @FXML
-    private void updateServerMessage() {
-        if (ServerThread.messageForClient != null) {
+    protected void updateServerMessage() {
+        LOGGER.info("trying to update message from server");
+        //if (ServerThread.messageForClient != null) {
 
-            control.receiveMessage();
+            //control.receiveMessage();
             clientMessageLabel.setText(Client.messageFromServer);
-        }
+
+        //}
     }
 
 

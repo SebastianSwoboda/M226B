@@ -1,5 +1,6 @@
 package serverClientMessenger;
 
+import javafx.application.Platform;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,15 +28,17 @@ public class Client implements Runnable {
 
 
             LOGGER.info("Connection to server: " + serverSocket.isConnected());
+            PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(serverSocket.getInputStream()));
+
 
             while (serverSocket.isConnected()) {
-                PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(serverSocket.getInputStream()));
 
 
                 messageFromServer = in.readLine();
-                out.println(messageForServer);
+                Platform.runLater(new UpdateMessageLabel(true));
+                // out.println(messageForServer);
             }
             LOGGER.info("client has disconnected from server");
             Thread.currentThread().interrupt();
@@ -58,9 +61,12 @@ public class Client implements Runnable {
     }
 
     void receiveMessage() {
+
         try {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(serverSocket.getInputStream()));
+            LOGGER.info("trying to update message from server");
+
             //LOGGER.info(in.readLine());
 
 

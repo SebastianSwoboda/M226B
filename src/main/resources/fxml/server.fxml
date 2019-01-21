@@ -14,7 +14,6 @@
     <Button fx:id="sendMessageAsServerButton" text="Send" onAction="#sendMessageAsServer" GridPane.columnIndex="1"/>
 
     <Label fx:id="serverMessageLabel" text="Your message will appear here" GridPane.rowIndex="2" />
-    <Button fx:id="updateButton" text="Update" onAction="#updateClientMessage" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
 
 
