@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <GridPane fx:controller="serverClientMessenger.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-
-
     <TextField fx:id="serverMessagingField"  />
     <Button fx:id="sendMessageAsServerButton" text="Send" onAction="#sendMessageAsServer" GridPane.columnIndex="1"/>
-
     <Label fx:id="serverMessageLabel" text="Your message will appear here" GridPane.rowIndex="2" />
-
-
-
-
 </GridPane>

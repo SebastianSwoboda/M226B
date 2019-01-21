@@ -1,9 +1,6 @@
 package serverClientMessenger;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -19,8 +16,6 @@ public class Controller {
     private static Control control = new Control();
 
     private Main main = new Main();
-
-
 
 
     @FXML
@@ -52,22 +47,15 @@ public class Controller {
     @FXML
     private void startClientConfig() {
         currentStage = main.createClientConfigStage();
-
     }
-
 
     @FXML
     private void startServer() {
         currentStage.close();
         main.createServerStage();
-
         int portServer = Integer.parseInt(serverPort.getText());
-
         control.startServer(portServer);
-
-
     }
-
 
     @FXML
     private void startClient() {
@@ -77,37 +65,21 @@ public class Controller {
             int portClient = Integer.parseInt(clientPort.getText());
             String addressForServer = serverAddress.getText();
             control.startClient(addressForServer, portClient);
-
             main.createClientStage();
-
-
         } catch (Exception e) {
             LOGGER.error("when starting client" + e);
         }
-
-
     }
-
 
     @FXML
     private void sendMessageAsClient() {
-
         try {
-            /*
-            OutputStream outToServer = user.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF(messagingField.getText());*/
-            //hostMessageLabel.setText("hello dude");
+
             Client.messageForServer = messagingField.getText();
             control.sendMessage();
-
-
         } catch (Exception e) {
             System.err.println("Error when sending message to host" + e);
-
         }
-
-
     }
 
     @FXML
@@ -117,25 +89,16 @@ public class Controller {
         ServerThread.sendMessageToClient();
     }
 
-
     @FXML
-    protected void updateClientMessage() {
+    void updateClientMessage() {
         serverMessageLabel.setText(ServerThread.messageFromClient);
-
     }
 
     @FXML
-    protected void updateServerMessage() {
+    void updateServerMessage() {
         LOGGER.info("trying to update message from server");
-        //if (ServerThread.messageForClient != null) {
-
-            //control.receiveMessage();
-            clientMessageLabel.setText(Client.messageFromServer);
-
-        //}
+        clientMessageLabel.setText(Client.messageFromServer);
     }
-
-
 }
 
 

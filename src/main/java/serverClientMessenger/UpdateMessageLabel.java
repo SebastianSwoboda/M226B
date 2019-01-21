@@ -1,7 +1,7 @@
 package serverClientMessenger;
 
 public class UpdateMessageLabel implements Runnable {
-    boolean isMessageFromClient;
+    private boolean isMessageFromClient;
 
     UpdateMessageLabel(boolean isServer) {
         this.isMessageFromClient = isServer;

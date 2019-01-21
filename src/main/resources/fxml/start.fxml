@@ -1,15 +1,11 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+
 <GridPane fx:controller="serverClientMessenger.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-
-
-
-    <Button fx:id="connectButton" text="Start Client" onAction="#startClientConfig"/>
-    <Button fx:id="startServer" text="Start Server" onAction="#startServerConfig" GridPane.rowIndex="3"/>
-
-
+    <Button fx:id="startClientButton" text="Start Client" onAction="#startClientConfig"/>
+    <Button fx:id="startServerButton" text="Start Server" onAction="#startServerConfig" GridPane.rowIndex="3"/>
 </GridPane>

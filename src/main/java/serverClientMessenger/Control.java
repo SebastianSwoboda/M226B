@@ -17,26 +17,19 @@ class Control {
 
     void startServer(int port) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-
         executor.submit(new Server(port));
-
-
     }
 
     void startClient(String address, int port) {
 
         try {
 
-
             Socket serverSocket = new Socket(address, port);
             client = new Client(serverSocket);
             Thread thread = new Thread(client);
             thread.start();
 
-
-            //client = new Client(serverSocket);
             LOGGER.info("Client connected to server");
-
 
         } catch (IOException e) {
             LOGGER.error("when starting the client" + e);
@@ -45,14 +38,6 @@ class Control {
 
     void sendMessage() {
         LOGGER.info("Client sending message to server");
-
-        client.sendMessage();
+        client.sendMessageToServer();
     }
-
-    void receiveMessage() {
-        LOGGER.info("calling receive method for client");
-        client.receiveMessage();
-    }
-
-
 }

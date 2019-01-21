@@ -26,46 +26,30 @@ public class ServerThread extends Thread {
         try {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             LOGGER.info("trying to send message to client " + messageForClient);
-
             out.println(ServerThread.messageForClient);
-
         } catch (IOException e) {
             LOGGER.error("while sending message to client" + e);
         }
-
     }
 
     public void run() {
-
         LOGGER.info("Just connected to " + clientSocket.getRemoteSocketAddress());
-
         try (
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
-
             while (clientSocket.isConnected()) {
-
-
                 messageFromClient = in.readLine();
                 Platform.runLater(new UpdateMessageLabel(false));
-
-
                 LOGGER.info("received client message " + messageFromClient);
             }
             LOGGER.info("client has disconnected from server, socket will be closed");
             Thread.currentThread().interrupt();
-
         } catch (SocketTimeoutException s) {
             LOGGER.error("Socket timed out!" + s);
 
         } catch (IOException e) {
             LOGGER.error("while reading message from client" + e);
-
         }
-
-
     }
-
-
 }
 
 

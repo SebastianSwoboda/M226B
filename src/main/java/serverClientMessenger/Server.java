@@ -18,7 +18,6 @@ public class Server implements Runnable {
     public void run() {
         boolean listening = true;
         try {
-
             ServerSocket serverSocket = new ServerSocket(port);
             while (listening) {
                 LOGGER.info("Waiting for client on port " +
@@ -30,13 +29,8 @@ public class Server implements Runnable {
             }
             LOGGER.info("server socket has been closed");
             Thread.currentThread().interrupt();
-            return;
-
         } catch (IOException e) {
             LOGGER.error("error when creating server socket" + e);
         }
-
     }
-
-
 }

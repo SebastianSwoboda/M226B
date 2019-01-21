@@ -28,21 +28,17 @@ public class Client implements Runnable {
 
 
             LOGGER.info("Connection to server: " + serverSocket.isConnected());
-            PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(serverSocket.getInputStream()));
 
-
             while (serverSocket.isConnected()) {
-
 
                 messageFromServer = in.readLine();
                 Platform.runLater(new UpdateMessageLabel(true));
-                // out.println(messageForServer);
+
             }
             LOGGER.info("client has disconnected from server");
             Thread.currentThread().interrupt();
-            return;
 
 
         } catch (IOException e) {
@@ -50,7 +46,7 @@ public class Client implements Runnable {
         }
     }
 
-    void sendMessage() {
+    void sendMessageToServer() {
         try {
             PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
             out.println(messageForServer);
@@ -60,22 +56,5 @@ public class Client implements Runnable {
         }
     }
 
-    void receiveMessage() {
 
-        try {
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(serverSocket.getInputStream()));
-            LOGGER.info("trying to update message from server");
-
-            //LOGGER.info(in.readLine());
-
-
-            messageFromServer = in.readLine();
-
-        } catch (IOException e) {
-            LOGGER.error("when receiving message from server" + e);
-        }
-
-
-    }
 }
