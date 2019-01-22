@@ -11,25 +11,13 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class ServerThread extends Thread {
+public class ServerThread extends Messaging {
     private static final Logger LOGGER = LogManager.getLogger(ServerThread.class);
     static String messageFromClient;
-    static String messageForClient;
-    private static Socket clientSocket;
+    private Socket clientSocket;
 
     ServerThread(Socket clientSocket) {
-        super("ServerThread");
-        ServerThread.clientSocket = clientSocket;
-    }
-
-    static void sendMessageToClient() {
-        try {
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-            LOGGER.info("trying to send message to client " + messageForClient);
-            out.println(ServerThread.messageForClient);
-        } catch (IOException e) {
-            LOGGER.error("while sending message to client" + e);
-        }
+        this.clientSocket = clientSocket;
     }
 
     public void run() {
@@ -37,9 +25,8 @@ public class ServerThread extends Thread {
         try (
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
             while (clientSocket.isConnected()) {
-                messageFromClient = in.readLine();
+                messageFromClient = receiveMessage(in);
                 Platform.runLater(new UpdateMessageLabel(false));
-                LOGGER.info("received client message " + messageFromClient);
             }
             LOGGER.info("client has disconnected from server, socket will be closed");
             Thread.currentThread().interrupt();
@@ -47,8 +34,15 @@ public class ServerThread extends Thread {
             LOGGER.error("Socket timed out!" + s);
 
         } catch (IOException e) {
-            LOGGER.error("while reading message from client" + e);
+            LOGGER.error("when getting input stream" + e);
         }
+    }
+
+    @Override
+    void sendMessage(String message) throws IOException {
+        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+        LOGGER.info("trying to send message to client " + message);
+        out.println(message);
     }
 }
 

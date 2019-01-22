@@ -31,7 +31,6 @@ public class Main extends Application {
     Stage createClientConfigStage() {
         Stage stage = new Stage();
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/clientConfig.fxml"));
             Parent root = loader.load();
             stage.setTitle("ClientConfig");

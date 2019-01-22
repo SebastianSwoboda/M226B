@@ -11,33 +11,27 @@ import java.util.concurrent.Executors;
 class Control {
 
     private static final Logger LOGGER = LogManager.getLogger(Control.class);
-
-
+    private ExecutorService executor = Executors.newFixedThreadPool(2);
     private Client client;
+    private Server server;
 
     void startServer(int port) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Server(port));
+        server = new Server(port);
+        executor.submit(server);
     }
 
-    void startClient(String address, int port) {
-
-        try {
-
-            Socket serverSocket = new Socket(address, port);
-            client = new Client(serverSocket);
-            Thread thread = new Thread(client);
-            thread.start();
-
-            LOGGER.info("Client connected to server");
-
-        } catch (IOException e) {
-            LOGGER.error("when starting the client" + e);
-        }
+    void startClient(String address, int port)throws IOException {
+        client = new Client(port, address);
+        executor.submit(client);
     }
 
-    void sendMessage() {
+    void sendMessageToServer(String message) throws IOException{
         LOGGER.info("Client sending message to server");
-        client.sendMessageToServer();
+        client.sendMessage(message);
+    }
+
+    void sendMessageToClient(String message) throws IOException{
+        LOGGER.info("Server sending message to client");
+        server.serverThread.sendMessage(message);
     }
 }

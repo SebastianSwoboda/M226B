@@ -17,6 +17,14 @@ public class Controller {
 
     private Main main = new Main();
 
+    private String getTextFromClientTextField() {
+        return clientMessagingField.getText();
+    }
+
+    private String getTextFromServerTextField() {
+        return serverMessagingField.getText();
+    }
+
 
     @FXML
     private TextField serverPort;
@@ -28,7 +36,7 @@ public class Controller {
     private TextField serverAddress;
 
     @FXML
-    private TextField messagingField;
+    private TextField clientMessagingField;
     @FXML
     private TextField serverMessagingField;
 
@@ -71,22 +79,24 @@ public class Controller {
         }
     }
 
+
     @FXML
     private void sendMessageAsClient() {
         try {
-
-            Client.messageForServer = messagingField.getText();
-            control.sendMessage();
+            control.sendMessageToServer(getTextFromClientTextField());
         } catch (Exception e) {
-            System.err.println("Error when sending message to host" + e);
+            LOGGER.error("when sending message to host: " + e, e);
         }
     }
 
     @FXML
     private void sendMessageAsServer() {
+        try {
+            control.sendMessageToClient(getTextFromServerTextField());
 
-        ServerThread.messageForClient = serverMessagingField.getText();
-        ServerThread.sendMessageToClient();
+        }catch (Exception e){
+            LOGGER.error("when sending message to client: "+e,e);
+        }
     }
 
     @FXML

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>serverClientMessenger</OriginalElement>
+  <nodes>
+    <node x="424.4703525641026" y="0.0">serverClientMessenger.Main</node>
+    <node x="32.333333333333314" y="626.0">serverClientMessenger.Server</node>
+    <node x="317.50446428571433" y="256.0">serverClientMessenger.UpdateMessageLabel</node>
+    <node x="22.504464285714278" y="256.5">serverClientMessenger.Messaging</node>
+    <node x="0.0" y="413.0">serverClientMessenger.ServerThread</node>
+    <node x="161.3453525641026" y="883.0">serverClientMessenger.Control</node>
+    <node x="319.5877976190476" y="413.0">serverClientMessenger.Client</node>
+    <node x="296.1294642857143" y="1149.0">serverClientMessenger.Controller</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="serverClientMessenger.Main" target="serverClientMessenger.Controller">
+      <point x="-29.75" y="103.0" />
+      <point x="513.7203525641027" y="236.0" />
+      <point x="572.413576007326" y="236.0" />
+      <point x="572.413576007326" y="1109.0" />
+      <point x="461.34375" y="1109.0" />
+      <point x="36.71428571428572" y="-246.0" />
+    </edge>
+    <edge source="serverClientMessenger.ServerThread" target="serverClientMessenger.UpdateMessageLabel">
+      <point x="69.33333333333331" y="-81.5" />
+      <point x="173.33333333333331" y="393.0" />
+      <point x="376.25446428571433" y="393.0" />
+      <point x="-58.75" y="48.5" />
+    </edge>
+    <edge source="serverClientMessenger.Controller" target="serverClientMessenger.Client">
+      <point x="0.0" y="-246.0" />
+      <point x="424.6294642857143" y="1129.0" />
+      <point x="452.3094093406593" y="1129.0" />
+      <point x="452.3094093406593" y="601.0" />
+      <point x="493.75446428571433" y="601.0" />
+      <point x="69.66666666666669" y="81.5" />
+    </edge>
+    <edge source="serverClientMessenger.Controller" target="serverClientMessenger.Main">
+      <point x="110.14285714285717" y="-246.0" />
+      <point x="534.7723214285714" y="1129.0" />
+      <point x="594.413576007326" y="1129.0" />
+      <point x="594.413576007326" y="236.0" />
+      <point x="632.7203525641025" y="236.0" />
+      <point x="89.24999999999999" y="103.0" />
+    </edge>
+    <edge source="serverClientMessenger.Client" target="serverClientMessenger.Messaging">
+      <point x="0.0" y="-81.5" />
+      <point x="424.0877976190476" y="373.0" />
+      <point x="263.1294642857143" y="373.0" />
+      <point x="103.125" y="48.0" />
+    </edge>
+    <edge source="serverClientMessenger.Control" target="serverClientMessenger.Client">
+      <point x="94.125" y="-103.0" />
+      <point x="380.9703525641026" y="863.0" />
+      <point x="403.56250000000006" y="863.0" />
+      <point x="403.56250000000006" y="601.0" />
+      <point x="424.0877976190476" y="601.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="serverClientMessenger.UpdateMessageLabel" target="serverClientMessenger.Main">
+      <point x="0.0" y="-48.5" />
+      <point x="435.00446428571433" y="236.0" />
+      <point x="454.2203525641026" y="236.0" />
+      <point x="-89.25" y="103.0" />
+    </edge>
+    <edge source="serverClientMessenger.Controller" target="serverClientMessenger.Control">
+      <point x="-73.42857142857144" y="-246.0" />
+      <point x="351.20089285714283" y="1119.0" />
+      <point x="224.0953525641026" y="1119.0" />
+      <point x="-62.75" y="103.0" />
+    </edge>
+    <edge source="serverClientMessenger.Controller" target="serverClientMessenger.ServerThread">
+      <point x="-110.14285714285717" y="-246.0" />
+      <point x="314.4866071428571" y="1129.0" />
+      <point x="21.833333333333314" y="1129.0" />
+      <point x="21.833333333333314" y="601.0" />
+      <point x="34.666666666666686" y="601.0" />
+      <point x="-69.33333333333331" y="81.5" />
+    </edge>
+    <edge source="serverClientMessenger.Server" target="serverClientMessenger.ServerThread">
+      <point x="84.5" y="-103.5" />
+      <point x="285.8333333333333" y="601.0" />
+      <point x="173.33333333333331" y="601.0" />
+      <point x="69.33333333333331" y="81.5" />
+    </edge>
+    <edge source="serverClientMessenger.ServerThread" target="serverClientMessenger.Messaging">
+      <point x="1.4210854715202004E-14" y="-81.5" />
+      <point x="104.0" y="393.0" />
+      <point x="125.62946428571428" y="393.0" />
+      <point x="-34.375" y="48.0" />
+    </edge>
+    <edge source="serverClientMessenger.Client" target="serverClientMessenger.UpdateMessageLabel">
+      <point x="69.66666666666669" y="-81.5" />
+      <point x="58.75" y="48.5" />
+    </edge>
+    <edge source="serverClientMessenger.Control" target="serverClientMessenger.Server">
+      <point x="-94.125" y="-103.0" />
+      <point x="192.7203525641026" y="863.0" />
+      <point x="116.83333333333331" y="863.0" />
+      <point x="-84.5" y="103.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="153.0" y="294.5" />
+  <SelectedNodes>
+    <node>serverClientMessenger.Main</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
