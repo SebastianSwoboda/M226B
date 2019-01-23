@@ -13,15 +13,14 @@ public class Server implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger(Server.class);
     private int port;
 
-    ServerThread serverThread;
+    public ServerThread serverThread;
 
     public Server(int port) {
         this.port = port;
     }
 
     public ServerSocket openServerSocket() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(port);
-        return serverSocket;
+        return new ServerSocket(port);
     }
 
     public Socket acceptConnectionFromClient(ServerSocket serverSocket) throws IOException {
@@ -31,11 +30,10 @@ public class Server implements Runnable {
         return clientSocket;
     }
 
-    private boolean startServerThread(Socket clientSocket) {
+    public void startServerThread(Socket clientSocket) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         serverThread = new ServerThread(clientSocket);
         executor.submit(serverThread);
-        return false;
     }
 
     public void run() {

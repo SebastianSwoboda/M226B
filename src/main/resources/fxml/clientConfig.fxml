@@ -3,9 +3,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
+<?import javafx.scene.control.Label?>
 <GridPane fx:controller="serverClientMessenger.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <TextField fx:id="serverAddress" text="10.16.77.167"/>
     <TextField fx:id="clientPort" text="8888" GridPane.rowIndex="2"/>
     <Button fx:id="clientPortButton" text="Submit" onAction="#startClient" GridPane.rowIndex="3"/>
+    <Label fx:id="clientConfigErrorLabel" GridPane.rowIndex="4" textFill="red"/>
 </GridPane>

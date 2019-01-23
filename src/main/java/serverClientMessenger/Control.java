@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,17 +19,17 @@ class Control {
         executor.submit(server);
     }
 
-    void startClient(String address, int port)throws IOException {
+    void startClient(String address, int port) throws Exception {
         client = new Client(port, address);
         executor.submit(client);
     }
 
-    void sendMessageToServer(String message) throws IOException{
+    void sendMessageToServer(String message) throws IOException {
         LOGGER.info("Client sending message to server");
         client.sendMessage(message);
     }
 
-    void sendMessageToClient(String message) throws IOException{
+    void sendMessageToClient(String message) throws IOException {
         LOGGER.info("Server sending message to client");
         server.serverThread.sendMessage(message);
     }

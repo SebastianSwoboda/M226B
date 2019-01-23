@@ -14,9 +14,9 @@ import java.net.SocketTimeoutException;
 public class ServerThread extends Messaging {
     private static final Logger LOGGER = LogManager.getLogger(ServerThread.class);
     static String messageFromClient;
-    private Socket clientSocket;
+    private static Socket clientSocket;
 
-    ServerThread(Socket clientSocket) {
+    public ServerThread(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
@@ -39,7 +39,7 @@ public class ServerThread extends Messaging {
     }
 
     @Override
-    void sendMessage(String message) throws IOException {
+    public void sendMessage(String message) throws IOException {
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
         LOGGER.info("trying to send message to client " + message);
         out.println(message);

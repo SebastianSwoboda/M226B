@@ -3,7 +3,6 @@ package serverClientMessenger;
 import javafx.application.Platform;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mortbay.util.IO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,10 +13,11 @@ import java.net.Socket;
 public class Client extends Messaging {
     private static final Logger LOGGER = LogManager.getLogger(Client.class);
     static String messageFromServer;
-    private Socket serverSocket;
+    public Socket serverSocket;
 
-    public Client(int port, String address) throws IOException {
+    public Client(int port, String address) throws Exception {
         serverSocket = new Socket(address, port);
+        LOGGER.info("connected to server");
     }
 
     public void run() {
@@ -37,7 +37,7 @@ public class Client extends Messaging {
     }
 
     @Override
-    void sendMessage(String message) throws IOException {
+    public void sendMessage(String message) throws IOException {
         PrintWriter out = new PrintWriter(serverSocket.getOutputStream(), true);
         out.println(message);
     }

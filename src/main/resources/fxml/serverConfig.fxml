@@ -4,9 +4,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
+<?import javafx.scene.control.Label?>
 <GridPane
         fx:controller="serverClientMessenger.Controller"
         xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <TextField fx:id="serverPort" text="8888"/>
     <Button fx:id="serverPortButton" text="Submit" onAction="#startServer" GridPane.columnIndex="2"/>
+    <Label fx:id="serverConfigErrorLabel" GridPane.rowIndex="3" textFill="red"/>
+
 </GridPane>

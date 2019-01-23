@@ -16,6 +16,24 @@ public class Controller {
     private static Control control = new Control();
 
     private Main main = new Main();
+    @FXML
+    private TextField serverPort;
+    @FXML
+    private TextField clientPort;
+    @FXML
+    private TextField serverAddress;
+    @FXML
+    private TextField clientMessagingField;
+    @FXML
+    private TextField serverMessagingField;
+    @FXML
+    private Label serverMessageLabel;
+    @FXML
+    private Label clientMessageLabel;
+    @FXML
+    private Label clientConfigErrorLabel;
+    @FXML
+    private Label serverConfigErrorLabel;
 
     private String getTextFromClientTextField() {
         return clientMessagingField.getText();
@@ -24,28 +42,6 @@ public class Controller {
     private String getTextFromServerTextField() {
         return serverMessagingField.getText();
     }
-
-
-    @FXML
-    private TextField serverPort;
-
-    @FXML
-    private TextField clientPort;
-
-    @FXML
-    private TextField serverAddress;
-
-    @FXML
-    private TextField clientMessagingField;
-    @FXML
-    private TextField serverMessagingField;
-
-    @FXML
-    private Label serverMessageLabel;
-
-    @FXML
-    private Label clientMessageLabel;
-
 
     @FXML
     private void startServerConfig() {
@@ -59,23 +55,31 @@ public class Controller {
 
     @FXML
     private void startServer() {
-        currentStage.close();
-        main.createServerStage();
-        int portServer = Integer.parseInt(serverPort.getText());
-        control.startServer(portServer);
+        try {
+            int portServer = Integer.parseInt(serverPort.getText());
+            control.startServer(portServer);
+            currentStage.close();
+            main.createServerStage();
+        } catch (NumberFormatException e) {
+            LOGGER.error("when starting server" + e, e);
+            serverConfigErrorLabel.setText("This port does not exist");
+        }
     }
 
     @FXML
     private void startClient() {
         try {
-
-            currentStage.close();
             int portClient = Integer.parseInt(clientPort.getText());
             String addressForServer = serverAddress.getText();
             control.startClient(addressForServer, portClient);
+            currentStage.close();
             main.createClientStage();
+        } catch (NumberFormatException e) {
+            LOGGER.error("when starting client" + e, e);
+            clientConfigErrorLabel.setText("This port does not exist");
         } catch (Exception e) {
-            LOGGER.error("when starting client" + e);
+            LOGGER.error("when starting client" + e, e);
+            clientConfigErrorLabel.setText("Problem occurred when connecting to server");
         }
     }
 
@@ -94,8 +98,8 @@ public class Controller {
         try {
             control.sendMessageToClient(getTextFromServerTextField());
 
-        }catch (Exception e){
-            LOGGER.error("when sending message to client: "+e,e);
+        } catch (Exception e) {
+            LOGGER.error("when sending message to client: " + e, e);
         }
     }
 
