@@ -15,7 +15,9 @@ public abstract class Messaging implements Runnable {
     public String receiveMessage(BufferedReader in) {
         String message = null;
         try {
+            MessageLogger messageLogger = new MessageLogger();
             message = in.readLine();
+            messageLogger.logMessages(message);
             LOGGER.info("received message " + message);
         } catch (IOException e) {
             LOGGER.error("when trying to receive message" + e);
