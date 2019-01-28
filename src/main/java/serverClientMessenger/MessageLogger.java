@@ -14,7 +14,11 @@ public class MessageLogger {
 
     public void logMessages(String message) throws IOException {
         writer.append(message);
-        writer.flush();
+
+    }
+
+    public void flushMessages()throws IOException{
+       writer.flush();
     }
 
 }

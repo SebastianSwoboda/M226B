@@ -13,11 +13,11 @@ import java.net.SocketTimeoutException;
 
 public class ServerThread extends Messaging {
     private static final Logger LOGGER = LogManager.getLogger(ServerThread.class);
+    public static Socket clientSocket;
     static String messageFromClient;
-    private static Socket clientSocket;
 
     public ServerThread(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+        ServerThread.clientSocket = clientSocket;
     }
 
     public void run() {
