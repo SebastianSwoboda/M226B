@@ -17,6 +17,8 @@ import static org.junit.Assert.assertTrue;
 
 
 public class ServerTests {
+
+
     private Server server1 = new Server(8888);
     private Server server2 = new Server(8118);
     private ServerSocket socket1;
@@ -78,7 +80,7 @@ public class ServerTests {
         Client client1 = new Client(8888, "localhost");
         client1.sendMessage("hello");
         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket1.getInputStream()));
-        assertEquals("client 1 sending message hello", "hello", server1.serverThread.receiveMessage(in));
+        assertEquals("client 1 sending message hello", "hello", server1.serverThreads.get(0).receiveMessage(in));
         socket1.close();
         socket2.close();
     }

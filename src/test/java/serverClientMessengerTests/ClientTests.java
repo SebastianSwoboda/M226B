@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ClientTests {
 
-    private Server server = new Server(8888);
+    private Server server = new Server(8889);
     private ServerSocket socket;
     private Socket clientSocket;
 
@@ -38,7 +38,7 @@ public class ClientTests {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(runnable);
         Thread.sleep(1000);
-        Client client = new Client(8888, "localhost");
+        Client client = new Client(8889, "localhost");
         ServerThread serverThread = new ServerThread(clientSocket);
         BufferedReader in = new BufferedReader(new InputStreamReader(client.serverSocket.getInputStream()));
         serverThread.sendMessage("hello");
@@ -48,6 +48,6 @@ public class ClientTests {
 
     @Test(expected = Exception.class)
     public void shouldThrowExceptionIfUnableToConnectToServer() throws Exception {
-        new Client(8888, "123");
+        new Client(8889, "123");
     }
 }

@@ -6,7 +6,7 @@
 
 <?import javafx.scene.control.Label?>
 <GridPane
-        fx:controller="serverClientMessenger.Controller"
+        fx:controller="serverClientMessenger.controllers.ServerConfigController"
         xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <TextField fx:id="serverPort" text="8888"/>
     <Button fx:id="serverPortButton" text="Submit" onAction="#startServer" GridPane.columnIndex="2"/>

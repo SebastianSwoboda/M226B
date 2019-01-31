@@ -3,8 +3,27 @@
     <Properties>
         <Property name="logdirectory" value="log"/>
         <Property name="networkLogFile" value="networkLog"/>
+        <Property name="messageLogFile" value="messageLog"/>
     </Properties>
     <Appenders>
+        <RollingFile name="MessageLog" fileName="${logdirectory}/${messageLogFile}.log"
+                     filePattern="${logdirectory}/$${date:yyyy-MM}/${messageLogFile}-%d{yyyy-MM-dd}-%i.log.gz">
+
+            <PatternLayout
+                    pattern="B,%d{yyyy-MM-dd'T'HH:mm:ss},%p,${sys:user.name},${appname},%c{1}:%L,%m%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20">
+                <Delete basePath="${logdirectory}" maxDepth="2">
+                    <IfFileName glob="*/${messageLogFile}-*.log.gz"/>
+                    <IfLastModified age="P90D"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
         <RollingFile name="NetworkLog" fileName="${logdirectory}/${networkLogFile}.log"
                      filePattern="${logdirectory}/$${date:yyyy-MM}/${networkLogFile}-%d{yyyy-MM-dd}-%i.log.gz">
             <Filters>
@@ -37,5 +56,9 @@
             <AppenderRef ref="Console"/>
             <AppenderRef ref="NetworkLog"/>
         </Root>
+        <logger  name="MY_MESSAGES" level="info" additivity="false">>
+            <AppenderRef ref="MessageLog"/>
+        </logger>
+
     </Loggers>
 </Configuration>

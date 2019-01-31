@@ -2,35 +2,65 @@ package serverClientMessenger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import serverClientMessenger.controllers.ClientController;
+import serverClientMessenger.controllers.ServerController;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-class Control {
+/**
+ *  Either the clientController or the serverController will create an object of this class and start either a server or
+ * a client. It provides a bridge for the ui to communicate with the logic. Example: When you decide to send a message as a
+ * client and press send in the ui, this class will be called and this class will call the corresponding method to
+ * send a message to the server.
+ * @author Sebastian Swoboda and Silvio Merz
+ * @since 1.0
+
+ */
+public class Control {
 
     private static final Logger LOGGER = LogManager.getLogger(Control.class);
-    private ExecutorService executor = Executors.newFixedThreadPool(2);
-    private Client client;
-    private Server server;
+    private  Client client;
+    private  Server server;
+    private ExecutorService executor = Executors.newFixedThreadPool(10);
 
-    void startServer(int port) {
-        server = new Server(port);
+    public void startServer(int port, ServerController serverController) throws RuntimeException {
+        server = new Server(port, serverController);
         executor.submit(server);
     }
 
-    void startClient(String address, int port) throws Exception {
-        client = new Client(port, address);
+    public void stopServer() throws IOException {
+        server.closeServerSocket();
+    }
+
+    public void startClient(String address, int port, ClientController clientController) throws Exception {
+        client = new Client(port, address, clientController);
         executor.submit(client);
     }
 
-    void sendMessageToServer(String message) throws IOException {
+    public void stopClient() {
+        try {
+            if (client!=null) {
+
+
+                client.closeServerSocket();
+            }
+        } catch (IOException e) {
+            LOGGER.error("when trying to close client socket" + e, e);
+        }
+    }
+
+    public void sendMessageToServer(String message) throws IOException {
         LOGGER.info("Client sending message to server");
         client.sendMessage(message);
     }
 
-    void sendMessageToClient(String message) throws IOException {
+    public void sendMessageToClient(String message) throws IOException {
         LOGGER.info("Server sending message to client");
-        server.serverThread.sendMessage(message);
+        for (ServerThread e : server.serverThreads) {
+            e.sendMessage(message);
+
+        }
     }
 }

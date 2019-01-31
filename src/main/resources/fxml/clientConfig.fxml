@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Button?>
 
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="serverClientMessenger.Controller"
+<GridPane fx:controller="serverClientMessenger.controllers.ClientConfigController"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <TextField fx:id="serverAddress" text="10.16.77.167"/>
     <TextField fx:id="clientPort" text="8888" GridPane.rowIndex="2"/>

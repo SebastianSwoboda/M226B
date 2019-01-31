@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
 
-<GridPane fx:controller="serverClientMessenger.Controller"
+<GridPane fx:controller="serverClientMessenger.controllers.MainController"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <Button fx:id="startClientButton" text="Start Client" onAction="#startClientConfig"/>
     <Button fx:id="startServerButton" text="Start Server" onAction="#startServerConfig" GridPane.rowIndex="3"/>
